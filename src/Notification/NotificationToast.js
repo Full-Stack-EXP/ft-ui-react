@@ -21,8 +21,8 @@ export default function NotificationToast() {
         error: '#dc3545',
         confirm: '#ffc107',
         info: '#007bff',
-        bg: '#ffffff',
-        text: '#333'
+        bg: 'var(--content-bg, #ffffff)', 
+        text: 'var(--text-color, #333333)'
     };
 
     let icon, iconColor, boxShadow;
@@ -58,7 +58,7 @@ export default function NotificationToast() {
             maxWidth: notification.type === 'confirm' ? '500px' : '400px',
             padding: '1rem',
             borderRadius: '8px',
-            backgroundColor: colors.bg,
+            backgroundColor: colors.bg, 
             color: colors.text,
             boxShadow: boxShadow,
             zIndex: 9999,
@@ -68,16 +68,38 @@ export default function NotificationToast() {
             border: `1px solid ${iconColor}`,
             fontFamily: 'system-ui, sans-serif',
             transform: notification.type === 'confirm' ? 'translateY(50%)' : 'none',
+            transition: 'background-color 0.3s, color 0.3s', 
         },
         content: { display: 'flex', alignItems: 'center', gap: '1rem', width: '100%' },
         message: { margin: 0, fontWeight: 500, flexGrow: 1 },
-        closeBtn: { background: 'none', border: 'none', color: '#6c757d', cursor: 'pointer', fontSize: '1.2rem', padding: 0 },
-        actions: { display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' },
-        btnConfirm: {
-            backgroundColor: '#007bff', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '4px', cursor: 'pointer', fontWeight: '600'
+        closeBtn: { 
+            background: 'none', 
+            border: 'none', 
+            color: 'var(--text-color-muted, #6c757d)', 
+            cursor: 'pointer', 
+            fontSize: '1.2rem', 
+            padding: 0 
         },
+        actions: { display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' },
+        
+        btnConfirm: {
+            backgroundColor: '#007bff', 
+            color: 'white', 
+            border: 'none', 
+            padding: '0.5rem 1rem', 
+            borderRadius: '4px', 
+            cursor: 'pointer', 
+            fontWeight: '600'
+        },
+        
         btnCancel: {
-            backgroundColor: '#6c757d', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '4px', cursor: 'pointer', fontWeight: '600'
+            backgroundColor: colors.error,
+            color: 'white', 
+            border: 'none', 
+            padding: '0.5rem 1rem', 
+            borderRadius: '4px', 
+            cursor: 'pointer', 
+            fontWeight: '600'
         }
     };
 
@@ -95,8 +117,8 @@ export default function NotificationToast() {
             
             {notification.type === 'confirm' && (
                 <div style={styles.actions}>
-                    <button style={styles.btnCancel} onClick={hideNotification}>Cancelar</button>
                     <button style={styles.btnConfirm} onClick={notification.onConfirm}>Confirmar</button>
+                    <button style={styles.btnCancel} onClick={hideNotification}>Cancelar</button>
                 </div>
             )}
         </div>
