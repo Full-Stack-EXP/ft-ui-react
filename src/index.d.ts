@@ -10,3 +10,11 @@ export function useNotification(): {
     hideNotification: () => void;
     notification: any;
 };
+
+export const KpiCard: React.FC<{
+    title: string;
+    value: string | number;
+    icon: React.ReactNode;
+    color?: string;
+    helpText?: string;
+}>;
